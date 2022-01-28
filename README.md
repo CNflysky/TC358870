@@ -9,3 +9,6 @@ MCU: STM32F103C8T6
 
 # Software
 Use VSCode + PlatformIO as compiler, STM32Cube HAL library as SDK.
+
+# Supported Panels
+LT070ME05000  (7' inch, 1920*1200, MIPI 4 Lane, 31P Connector)
