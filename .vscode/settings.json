@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "tc358870_i2c.h": "c",
+        "tc358870_init.h": "c",
+        "tc358870_uart.h": "c"
+    }
+}
