@@ -11,4 +11,6 @@ MCU: STM32F103C8T6
 Use VSCode + PlatformIO as compiler, STM32Cube HAL library as SDK.
 
 # Supported Panels
-LT070ME05000  (7' inch, 1920*1200, MIPI 4 Lane, 31P Connector)
+| Part Number | Size | Resolution | Interface | Connector | 
+| ---- | ---- | --- | --- | --- |
+|LT070ME05000| 7' Inch| WUXGA(1920*1200)| MIPI 4 Lane | 31P Connector |
