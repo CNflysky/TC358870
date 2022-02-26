@@ -3,8 +3,8 @@ Various display drivers for the TC358870XBG HDMI to MIPI bridge.
 Simplified Chinese: [Here](https://github.com/CNflysky/TC358870_Drivers/blob/main/README_zh.md)
 
 # Hardware
-Hardware : [Source](https://github.com/zengcym/HDMI-To-MIPI).  
-I have a modified version of this board: Added two I2C pull-up resistors, added a user button(for USB DFU) and wired out I2C2 pin as touch I2C bus(not implemented yet).  
+Hardware : based on zengcym's hardware: [Link](https://github.com/zengcym/HDMI-To-MIPI).  
+I have a modified version of this board: Added I2C1 pull-up resistors, added an user button(for USB DFU) and wired out I2C2 pin as touch I2C bus(not implemented yet).  
 It has not been tested yet,when I have finished it,I will upload it into this repository.  
 MCU: STM32F103C8T6    
 
@@ -18,6 +18,9 @@ Open `TC358870/include/tc358870_panel.h`,choose your panel by uncomment the foll
 // #define TPM0551002P
 ```  
 # Compile and Upload
+Download VScode Editor(Just Google it)  
+Open VSCode,install PlatformIO plugin,and wait it finishes(This may take a while).  
+Clone(or download) this repository,open TC358870_USB_DFU first,complie and upload to your board.  
 TODO  
 
 # Supported Panels
