@@ -5,8 +5,12 @@ Simplified Chinese: [Here](https://github.com/CNflysky/TC358870_Drivers/blob/mai
 # Hardware
 Hardware : based on zengcym's hardware: [Link](https://github.com/zengcym/HDMI-To-MIPI).  
 I have a modified version of this board: Added I2C1 pull-up resistors, added an user button(for USB DFU) and wired out I2C2 pin as touch I2C bus(not implemented yet).  
-You can find it at the `hardware` directory.
-MCU: STM32F103C8T6    
+You can find it at the `hardware` directory.  
+MCU: STM32F103C8T6  
+Board design used EasyEDA Pro.  
+![design](https://github.com/CNflysky/TC358870_Drivers/raw/main/images/board.png)
+![2d](https://github.com/CNflysky/TC358870_Drivers/raw/main/images/2d.png)
+![PCBA](https://github.com/CNflysky/TC358870_Drivers/raw/main/images/PCBA.jpg)
 
 # Software
 VSCode + PlatformIO as IDE, STM32CubeHAL library as SDK.  
