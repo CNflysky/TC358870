@@ -5,7 +5,7 @@ Simplified Chinese: [Here](https://github.com/CNflysky/TC358870_Drivers/blob/mai
 # Hardware
 Hardware : based on zengcym's hardware: [Link](https://github.com/zengcym/HDMI-To-MIPI).  
 I have a modified version of this board: Added I2C1 pull-up resistors, added an user button(for USB DFU) and wired out I2C2 pin as touch I2C bus(not implemented yet).  
-It has not been tested yet,when I have finished it,I will upload it into this repository.  
+You can find it at the `hardware` directory.
 MCU: STM32F103C8T6    
 
 # Software
