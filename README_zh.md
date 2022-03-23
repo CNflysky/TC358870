@@ -3,13 +3,19 @@
 
 # 硬件
 本项目硬件基于zengcym的硬件: [链接](https://github.com/zengcym/HDMI-To-MIPI)。  
-注意：该电路板存在一个问题,**I2C总线上没有外置上拉电阻**。如果想要使用本工程的代码，需要在板子上加两个1K上拉电阻，或者使用软件模拟I2C。  
+我设计了一个改进版的硬件：在I2C1上加了上拉电阻，加了一个外接按键作为DFU下载使用，也引出了I2C2作为触摸驱动使用(触摸功能暂未实现)。  
+板子放在`Hardware`文件夹里了。
 MCU使用STM32F103C8T6。  
+板子设计使用的是立创EDA专业版。
+![design](https://github.com/CNflysky/TC358870_Drivers/raw/main/images/board.png)
+![2d](https://github.com/CNflysky/TC358870_Drivers/raw/main/images/2d.png)
+![PCBA](https://github.com/CNflysky/TC358870_Drivers/raw/main/images/PCBA.jpg)
 
 # 软件
-软件方面，使用PlatformIO作为IDE，STM32Cube HAL库作为SDK。
+软件方面，使用VScode + PlatformIO作为IDE，STM32Cube HAL库作为SDK。
 
 # 适配屏幕
 | 料号 | 尺寸 | 分辨率 | 接口 | 连接器 | 
 | ---- | ---- | --- | --- | --- |
-|LT070ME05000| 7' Inch| WUXGA(1920*1200)| MIPI 4 Lane | 31P 连接器 |
+| LT070ME05000 | 7' Inch| WUXGA(1920*1200)| MIPI 4 Lane | 31P 连接器 |
+|TPM0551002P | 5.5' Inch | FHD(1920*1080) | MIPI 4 Lane | 39P 连接器 | 触摸芯片:Synaptics S3351 |
