@@ -1,6 +1,6 @@
 # TC358870_Drivers
 Various display drivers for the TC358870XBG HDMI to MIPI bridge.  
-Simplified Chinese: [Here](https://github.com/CNflysky/TC358870_Drivers/blob/main/README_zh.md)
+[Simplified Chinese](https://github.com/CNflysky/TC358870_Drivers/blob/main/README_zh.md)
 
 # Hardware
 Hardware : based on zengcym's hardware: [Link](https://github.com/zengcym/HDMI-To-MIPI).  
