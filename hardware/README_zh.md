@@ -6,5 +6,5 @@ BOM.csv
 Marker.pdf
 ```
 其中，`Gerber.zip`是能够直接送至板厂进行打板的文件。  
-BOM.csv则为物料清单。  
-Marker.pdf是位号，用于焊接时确认。  
+`BOM.csv`则为物料清单。  
+`Marker.pdf`是位号，用于焊接时确认。  
