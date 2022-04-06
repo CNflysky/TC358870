@@ -34,5 +34,6 @@ Connect your board to PC using a HDMI cable,your computer will find a new hardwa
 # Supported Panels
 | Part Number | Size | Resolution | Interface | Connector | Note |
 | ---- | ---- | --- | --- | --- | --- |
-|LT070ME05000| 7' Inch| WUXGA(1920*1200)| MIPI 4 Lane | 31P Connector ||
-|TPM0551002P | 5.5' Inch | FHD(1920*1080) | MIPI 4 Lane | 39P Connector | TP:Synaptics S3351 |
+|LT070ME05000| 7' Inch| WUXGA(1200*1920)| MIPI 4 Lane | 31P Connector ||
+|TPM0551002P | 5.5' Inch | FHD(1080*1920) | MIPI 4 Lane | 39P Connector | TP:Synaptics S3351 |
+|VVX10F034N00 | 10.1' Inch | WUXGA(1920*1200) | MIPI 4 Lane | 51P Connector | Default display mode:horizontal |
