@@ -15,8 +15,8 @@ MCU使用STM32F103C8T6。
 软件方面，使用VScode + PlatformIO作为IDE，STM32Cube HAL库作为SDK。
 
 # 适配屏幕
-| 料号 | 尺寸 | 分辨率 | 接口 | 连接器 | 
-| ---- | ---- | --- | --- | --- |
+| 料号 | 尺寸 | 分辨率 | 接口 | 连接器 | 备注 |
+| ---- | ---- | --- | --- | --- | --- |
 | LT070ME05000 | 7' Inch| WUXGA(1920*1200)| MIPI 4 Lane | 31P 连接器 |
 |TPM0551002P | 5.5' Inch | FHD(1920*1080) | MIPI 4 Lane | 39P 连接器 | 触摸芯片:Synaptics S3351 |
 |VVX10F034N00 | 10.1' Inch | WUXGA(1920*1200) | MIPI 4 Lane | 51P 连接器 | 默认显示模式:横屏 |
