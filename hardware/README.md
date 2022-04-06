@@ -5,6 +5,6 @@ Gerber.zip
 BOM.csv
 Marker.pdf
 ```
-`Gerber.zip` is the gerber of the adapter.
-`BOM.csv` is the bom of the adapter.
-`Marker.pdf` is used during the soldering.
+`Gerber.zip` is the gerber of the adapter.  
+`BOM.csv` is the bom of the adapter.  
+`Marker.pdf` is used during the soldering.  
