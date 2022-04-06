@@ -11,7 +11,7 @@
 #define PanelPWR_GPIO_Port GPIOA
 #define NS4150_Pin GPIO_PIN_0
 #define NS4150_GPIO_Port GPIOB
-#define USR_LED_Pin GPIO_PIN_10
+#define USR_LED_Pin GPIO_PIN_15
 #define USR_LED_GPIO_Port GPIOB
 #define TC35RST_Pin GPIO_PIN_9
 #define TC35RST_GPIO_Port GPIOB
