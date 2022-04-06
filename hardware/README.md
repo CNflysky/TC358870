@@ -1,5 +1,5 @@
 This direcory contains hardware-related files(board,adapter,etc.).  
-[Simplified Chinese](https://github.com/CNflysky/TC358870_Drivers/blob/main/hardware/README.md)  
+[Simplified Chinese](https://github.com/CNflysky/TC358870_Drivers/blob/main/hardware/README_zh.md)  
 Every adapter directory have these 3 files:
 ```
 Gerber.zip
