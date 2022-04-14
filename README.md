@@ -30,6 +30,8 @@ You will see the `USR_LED` flashs,that means the MCU has entered the DFU mode.
 Back to `VSCode`,open `TC358870` ,compile and download.  
 Then reset the board(press reset button on the board),you will see the `USR_LED` not light up, It's ok.  
 Connect your board to PC using a HDMI cable,your computer will find a new hardware, enter the monitor settings page you will found 'Toshiba UH2D' device,that means TC358870 chip works fine.  
+Unplug board,connect panel to board,then plug back to your computer.  
+If everything is ok, there will be a desktop on your panel.  
 
 # Supported Panels
 | Part Number | Size | Resolution | Interface | Connector | Note |
