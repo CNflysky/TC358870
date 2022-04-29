@@ -1,6 +1,6 @@
 #ifndef _VVX10F034N00_H_
 #define _VVX10F034N00_H_
-#include "tc358870_i2c.h"
+#include "tc358870_backlight.h"
 
 #define POWER_ON_DELAY 10
 // since there is no external reset pin of this panel,we just need to sleep for
@@ -11,6 +11,30 @@
 
 #define Waitx1ms(x) HAL_Delay(x)
 #define Waitx1us(x) HAL_Delay(1)
+
+void panel_backlight_setup() { panel_pwm_backlight_setup(); }
+void panel_backlight_enable() { panel_pwm_backlight_enable(); }
+void panel_backlight_disable() { panel_pwm_backlight_disable(); }
+void panel_backlight_set_brightness(uint8_t br) {
+  switch (br) {
+    case 1:
+      panel_pwm_backlight_set_brightness(200);
+      break;
+    case 2:
+      panel_pwm_backlight_set_brightness(400);
+      break;
+    case 3:
+      panel_pwm_backlight_set_brightness(600);
+      break;
+    case 4:
+      panel_pwm_backlight_set_brightness(800);
+      break;
+    case 5:
+      panel_pwm_backlight_set_brightness(999);
+      break;
+  }
+}
+
 void RS1() {
   // Initialization for Stand-by (RS1)
   // Software Reset
@@ -316,82 +340,78 @@ void RS1() {
   i2c1_uh2cd_write16(0x0016, 0x0F1F);  // IntMask
   // Enter Sleep
   i2c1_uh2cd_write16(0x0002, 0x0001);  // SysCtl
-  // Interrupt Service Routine(RS_Int)
-  // Exit from Sleep
-  i2c1_uh2cd_write16(0x0002, 0x0000);  // SysCtl
-  Waitx1us(10);
 }
 
 void Panel_Init() {
   // Turn on peripherial
   i2c1_uh2cd_write16(0x0504, 0x0005);  // DCSCMD_Q
   i2c1_uh2cd_write16(0x0504, 0x0032);  // DCSCMD_Q
-  // Waitx1ms(120);
-  // // Soft Reset
-  // i2c1_uh2cd_write16(0x0504, 0x0005);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x0001);  // DCSCMD_Q
-  // Waitx1ms(5);
-  // // Set Pixel Format
-  // i2c1_uh2cd_write16(0x0504, 0x0015);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x773A);  // DCSCMD_Q
-  // Waitx1us(200);
-  // // Set Column Address
-  // i2c1_uh2cd_write16(0x0504, 0x8039);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x0005);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x002A);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x0400);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x00FF);  // DCSCMD_Q
-  // Waitx1us(200);
-  // // Set Page Address
-  // i2c1_uh2cd_write16(0x0504, 0x8039);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x0005);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x002B);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x0600);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x003F);  // DCSCMD_Q
-  // Waitx1us(200);
-  // // Set Tear On
-  // i2c1_uh2cd_write16(0x0504, 0x0015);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x0035);  // DCSCMD_Q
-  // Waitx1us(200);
-  // // Set Tear Scanline
-  // i2c1_uh2cd_write16(0x0504, 0x8039);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x0003);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x0044);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x0000);  // DCSCMD_Q
-  // Waitx1us(200);
-  // // Write Display Brightness
-  // i2c1_uh2cd_write16(0x0504, 0x0015);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0xFF51);  // DCSCMD_Q
-  // Waitx1us(200);
-  // // Write Control Display
-  // i2c1_uh2cd_write16(0x0504, 0x0015);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x2453);  // DCSCMD_Q
-  // Waitx1us(200);
-  // // Adaptive Brightness Control
-  // i2c1_uh2cd_write16(0x0504, 0x0015);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x0155);  // DCSCMD_Q
-  // Waitx1us(200);
-  // // Exit Sleep
-  // i2c1_uh2cd_write16(0x0504, 0x0005);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x0011);  // DCSCMD_Q
-  // Waitx1ms(120);
-  // // MCAP
-  // i2c1_uh2cd_write16(0x0504, 0x0023);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x00B0);  // DCSCMD_Q
-  // Waitx1us(200);
-  // // Backlight Control 4
-  // i2c1_uh2cd_write16(0x0504, 0x8029);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x0014);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x7DCE);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x4840);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x6756);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x8878);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0xA798);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0xC3B5);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0xDED1);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0xF2E9);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0xFFFA);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x0004);  // DCSCMD_Q
+  Waitx1ms(120);
+  // Soft Reset
+  i2c1_uh2cd_write16(0x0504, 0x0005);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x0001);  // DCSCMD_Q
+  Waitx1ms(5);
+  // Set Pixel Format
+  i2c1_uh2cd_write16(0x0504, 0x0015);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x773A);  // DCSCMD_Q
+  Waitx1us(200);
+  // Set Column Address
+  i2c1_uh2cd_write16(0x0504, 0x8039);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x0005);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x002A);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x0400);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x00FF);  // DCSCMD_Q
+  Waitx1us(200);
+  // Set Page Address
+  i2c1_uh2cd_write16(0x0504, 0x8039);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x0005);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x002B);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x0600);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x003F);  // DCSCMD_Q
+  Waitx1us(200);
+  // Set Tear On
+  i2c1_uh2cd_write16(0x0504, 0x0015);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x0035);  // DCSCMD_Q
+  Waitx1us(200);
+  // Set Tear Scanline
+  i2c1_uh2cd_write16(0x0504, 0x8039);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x0003);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x0044);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x0000);  // DCSCMD_Q
+  Waitx1us(200);
+  // Write Display Brightness
+  i2c1_uh2cd_write16(0x0504, 0x0015);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0xFF51);  // DCSCMD_Q
+  Waitx1us(200);
+  // Write Control Display
+  i2c1_uh2cd_write16(0x0504, 0x0015);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x2453);  // DCSCMD_Q
+  Waitx1us(200);
+  // Adaptive Brightness Control
+  i2c1_uh2cd_write16(0x0504, 0x0015);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x0155);  // DCSCMD_Q
+  Waitx1us(200);
+  // Exit Sleep
+  i2c1_uh2cd_write16(0x0504, 0x0005);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x0011);  // DCSCMD_Q
+  Waitx1ms(120);
+  // MCAP
+  i2c1_uh2cd_write16(0x0504, 0x0023);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x00B0);  // DCSCMD_Q
+  Waitx1us(200);
+  // Backlight Control 4
+  i2c1_uh2cd_write16(0x0504, 0x8029);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x0014);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x7DCE);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x4840);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x6756);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x8878);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0xA798);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0xC3B5);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0xDED1);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0xF2E9);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0xFFFA);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x0004);  // DCSCMD_Q
 }
 void RS3() {
   // MIPI Output Enable(RS3)
@@ -481,21 +501,21 @@ void RS3() {
   i2c1_uh2cd_write32(0x0110, 0x00000006);  // MODE_CONFIG
   i2c1_uh2cd_write32(0x0310, 0x00000006);  // MODE_CONFIG
   Waitx1ms(32);
-  // // MCAP
-  // i2c1_uh2cd_write16(0x0504, 0x0023);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x00B0);  // DCSCMD_Q
-  // Waitx1ms(32);
-  // // Interface Setting
-  // i2c1_uh2cd_write16(0x0504, 0x0023);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x14B3);  // DCSCMD_Q
-  // Waitx1ms(32);
-  // // MCAP
-  // i2c1_uh2cd_write16(0x0504, 0x0023);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x03B0);  // DCSCMD_Q
-  // Waitx1ms(32);
-  // // Set Display On
-  // i2c1_uh2cd_write16(0x0504, 0x0005);  // DCSCMD_Q
-  // i2c1_uh2cd_write16(0x0504, 0x0029);  // DCSCMD_Q
-  // Waitx1ms(32);
+  // MCAP
+  i2c1_uh2cd_write16(0x0504, 0x0023);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x00B0);  // DCSCMD_Q
+  Waitx1ms(32);
+  // Interface Setting
+  i2c1_uh2cd_write16(0x0504, 0x0023);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x14B3);  // DCSCMD_Q
+  Waitx1ms(32);
+  // MCAP
+  i2c1_uh2cd_write16(0x0504, 0x0023);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x03B0);  // DCSCMD_Q
+  Waitx1ms(32);
+  // Set Display On
+  i2c1_uh2cd_write16(0x0504, 0x0005);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x0029);  // DCSCMD_Q
+  Waitx1ms(32);
 }
 #endif

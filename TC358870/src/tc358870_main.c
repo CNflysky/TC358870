@@ -1,10 +1,8 @@
 #include <stdio.h>
+#include <system_stm32f1xx.h>
 
-#include "system_stm32f1xx.h"
-#include "tc358870_gpio.h"
 #include "tc358870_msp.h"
 #include "tc358870_panel.h"
-#include "tc358870_uart.h"
 #include "usb_device.h"
 
 #define USER_VECT_TAB_ADDRESS
@@ -33,19 +31,19 @@ void ReEnumerateUSB() {
 int main() {
   HAL_Init();
   SystemClock_Config();
-  MX_USART1_UART_Init();
-  printf("Initlizating GPIO...\n");
   MX_GPIO_Init();
-  printf("Initlizating USB...\n");
   ReEnumerateUSB();
   MX_USB_DEVICE_Init();
-  printf_u("Initlizating I2C...\n");
+  printf_u("Initlizating I2C1...\n");
   MX_I2C1_Init();
+  printf_u("Initlizating I2C1...\n");
+  MX_I2C2_Init();
   printf_u("Setting TC358870 address to 0x0F...\n");  // RESET: 0x0F SET: 0x1F
   tc358870_address_control(GPIO_PIN_RESET);
   printf_u("Resetting TC358870...\n");
   TC358870_Reset();
-  tc358870_address_control(GPIO_PIN_SET);
+  printf_u("Setting up backlight...\n");
+  panel_backlight_setup();
   printf_u("read chip id = 0x%x\n", i2c1_uh2cd_read16(0x0000));
   printf_u("Executing RS1 Sequence...\n");
   RS1();

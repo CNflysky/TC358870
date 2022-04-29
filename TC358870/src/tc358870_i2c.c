@@ -23,18 +23,18 @@ void i2c1_uh2cd_write8(uint16_t addr, uint8_t data) {
   // shift address left for 1 bit
   while ((hstatus = HAL_I2C_IsDeviceReady(&hi2c1, I2C_ADDR << 1, 5, 0xFFFF)) !=
          HAL_OK)
-    printf_u("device not ready,hstatus = %d\n", hstatus);
+    printf_u("i2c1: device not ready,hstatus = %d\n", hstatus);
 
   if ((hstatus = HAL_I2C_Mem_Write(&hi2c1, I2C_ADDR << 1, addr, 2, &data, 1,
                                    0xFFFF)) != HAL_OK)
-    printf_u("write data failed,hstatus = %d\n", hstatus);
+    printf_u("i2c1: write data failed,hstatus = %d\n", hstatus);
 }
 
 void i2c1_uh2cd_write16(uint16_t addr, uint16_t data) {
   HAL_StatusTypeDef hstatus = HAL_ERROR;
   while ((hstatus = HAL_I2C_IsDeviceReady(&hi2c1, I2C_ADDR << 1, 5, 0xFFFF)) !=
          HAL_OK)
-    printf_u("device not ready,hstatus = %d\n", hstatus);
+    printf_u("i2c1: device not ready,hstatus = %d\n", hstatus);
   union {
     uint16_t val;
     struct {
@@ -46,14 +46,14 @@ void i2c1_uh2cd_write16(uint16_t addr, uint16_t data) {
   uint8_t buffer[2] = {data_u.msb, data_u.lsb};
   if ((hstatus = HAL_I2C_Mem_Write(&hi2c1, I2C_ADDR << 1, addr, sizeof addr,
                                    buffer, sizeof buffer, 0xFFFF)) != HAL_OK)
-    printf_u("write data failed,hstatus = %d\n", hstatus);
+    printf_u("i2c1: write data failed,hstatus = %d\n", hstatus);
 };
 
 void i2c1_uh2cd_write32(uint16_t addr, uint32_t data) {
   HAL_StatusTypeDef hstatus = HAL_ERROR;
   while ((hstatus = HAL_I2C_IsDeviceReady(&hi2c1, I2C_ADDR << 1, 5, 0xFFFF)) !=
          HAL_OK)
-    printf_u("device not ready,hstatus = %d\n", hstatus);
+    printf_u("i2c1: device not ready,hstatus = %d\n", hstatus);
   union {
     uint32_t val;
     struct {
@@ -67,7 +67,7 @@ void i2c1_uh2cd_write32(uint16_t addr, uint32_t data) {
   uint8_t buffer[4] = {data_u.msb, data_u.a, data_u.b, data_u.lsb};
   if ((hstatus = HAL_I2C_Mem_Write(&hi2c1, I2C_ADDR << 1, addr, sizeof addr,
                                    buffer, sizeof buffer, 0xFFFF)) != HAL_OK)
-    printf_u("write data failed,hstatus = %d\n", hstatus);
+    printf_u("i2c1: write data failed,hstatus = %d\n", hstatus);
 };
 
 uint8_t i2c1_uh2cd_read8(uint16_t addr) {
@@ -76,7 +76,7 @@ uint8_t i2c1_uh2cd_read8(uint16_t addr) {
   // check tc358870 comm
   while ((hstatus = HAL_I2C_IsDeviceReady(&hi2c1, I2C_ADDR << 1, 5, 10)) !=
          HAL_OK)
-    printf_u("device not ready,hstatus = %d\n", hstatus);
+    printf_u("i2c1: device not ready,hstatus = %d\n", hstatus);
   // read data
   if ((hstatus = HAL_I2C_Mem_Read(&hi2c1, I2C_ADDR << 1, addr, sizeof addr,
                                   &data, sizeof data, 0xFFFF) != HAL_OK))
@@ -88,7 +88,7 @@ uint16_t i2c1_uh2cd_read16(uint16_t addr) {
   HAL_StatusTypeDef hstatus = HAL_ERROR;
   while ((hstatus = HAL_I2C_IsDeviceReady(&hi2c1, I2C_ADDR << 1, 5, 10)) !=
          HAL_OK)
-    printf_u("device not ready,hstatus = %d\n", hstatus);
+    printf_u("i2c1: device not ready,hstatus = %d\n", hstatus);
   uint8_t data[2] = {0x00};
   if ((hstatus = HAL_I2C_Mem_Read(&hi2c1, I2C_ADDR << 1, addr, sizeof addr,
                                   data, sizeof data, 0xFFFF) != HAL_OK))
@@ -109,7 +109,7 @@ uint32_t i2c1_uh2cd_read32(uint16_t addr) {
   HAL_StatusTypeDef hstatus = HAL_ERROR;
   while ((hstatus = HAL_I2C_IsDeviceReady(&hi2c1, I2C_ADDR << 1, 5, 0xFFFF)) !=
          HAL_OK)
-    printf_u("device not ready,hstatus = %d\n", hstatus);
+    printf_u("i2c1: device not ready,hstatus = %d\n", hstatus);
   union {
     uint32_t val;
     struct {
@@ -128,4 +128,45 @@ uint32_t i2c1_uh2cd_read32(uint16_t addr) {
   data_u.b = buf[2];
   data_u.lsb = buf[3];
   return data_u.val;
+}
+
+void MX_I2C2_Init(void) {
+  hi2c2.Instance = I2C2;
+  hi2c2.Init.ClockSpeed = 100000;
+  hi2c2.Init.DutyCycle = I2C_DUTYCYCLE_2;
+  hi2c2.Init.OwnAddress1 = 0;
+  hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c2.Init.OwnAddress2 = 0;
+  hi2c2.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c2.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c2) != HAL_OK) {
+    __disable_irq();
+    while (1) {
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_10);
+      HAL_Delay(500);
+    }
+  }
+}
+
+void i2c2_write8(uint8_t devaddr, uint16_t addr, uint8_t data) {
+  HAL_StatusTypeDef hstatus = HAL_ERROR;
+  while ((hstatus = HAL_I2C_IsDeviceReady(&hi2c2, devaddr, 5, 0xFFFF)) !=
+         HAL_OK)
+    printf_u("i2c2: device not ready,hstatus = %d\n", hstatus);
+
+  if ((hstatus = HAL_I2C_Mem_Write(&hi2c2, I2C_ADDR, addr, 2, &data, 1,
+                                   0xFFFF)) != HAL_OK)
+    printf_u("i2c2: write data failed,hstatus = %d\n", hstatus);
+}
+
+uint8_t i2c2_read8(uint8_t devaddr, uint16_t addr) {
+  HAL_StatusTypeDef hstatus = HAL_ERROR;
+  uint8_t data = 0x00;
+  while ((hstatus = HAL_I2C_IsDeviceReady(&hi2c2, devaddr, 5, 10)) != HAL_OK)
+    printf_u("i2c2: device not ready,hstatus = %d\n", hstatus);
+  if ((hstatus = HAL_I2C_Mem_Read(&hi2c2, I2C_ADDR, addr, sizeof addr, &data,
+                                  sizeof data, 0xFFFF) != HAL_OK))
+    printf_u("read data failed,hstatus = %d\n", hstatus);
+  return data;
 }

@@ -16,8 +16,17 @@ void MX_GPIO_Init(void) {
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, USR_LED_Pin | TC35RST_Pin, GPIO_PIN_SET);
 
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(TP_RST_GPIO_Port, TP_RST_Pin, GPIO_PIN_SET);
+  
+  /*Configure GPIO pin : DOWNLOAD_Pin */
+  GPIO_InitStruct.Pin = DOWNLOAD_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(DOWNLOAD_GPIO_Port, &GPIO_InitStruct);
+
   /*Configure GPIO pins : PanelBL_Pin PanelRST_Pin PanelPWR_Pin */
-  GPIO_InitStruct.Pin = PanelBL_Pin | PanelRST_Pin | PanelPWR_Pin;
+  GPIO_InitStruct.Pin = PanelRST_Pin | PanelPWR_Pin | TP_RST_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -44,10 +53,6 @@ void board_led_control(GPIO_PinState state) {
 
 void panel_power_control(GPIO_PinState state) {
   HAL_GPIO_WritePin(PanelPWR_GPIO_Port, PanelPWR_Pin, state);
-}
-
-void panel_backlight_control(GPIO_PinState state) {
-  HAL_GPIO_WritePin(PanelBL_GPIO_Port, PanelBL_Pin, state);
 }
 
 void panel_reset_control(GPIO_PinState state) {

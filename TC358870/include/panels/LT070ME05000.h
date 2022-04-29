@@ -1,6 +1,7 @@
 #ifndef _LT070ME05000_H_
 #define _LT070ME05000_H_
-#include "tc358870_i2c.h"
+
+#include "tc358870_backlight.h"
 
 #define POWER_ON_DELAY 10
 #define RESET_LOW_TIME 50
@@ -9,6 +10,30 @@
 
 #define Waitx1ms(x) HAL_Delay(x)
 #define Waitx1us(x) HAL_Delay(1)
+
+void panel_backlight_setup() { panel_cmd_backlight_setup(); }
+void panel_backlight_enable() { panel_cmd_backlight_enable(); }
+void panel_backlight_disable() { panel_cmd_backlight_disable(); }
+void panel_backlight_set_brightness(uint8_t br) {
+  switch (br) {
+    case 1:
+      panel_cmd_backlight_set_brightness(0x33);
+      break;
+    case 2:
+      panel_cmd_backlight_set_brightness(0x66);
+      break;
+    case 3:
+      panel_cmd_backlight_set_brightness(0x99);
+      break;
+    case 4:
+      panel_cmd_backlight_set_brightness(0xCC);
+      break;
+    case 5:
+      panel_cmd_backlight_set_brightness(0xFF);
+      break;
+  }
+}
+
 void RS1() {
   i2c1_uh2cd_write16(0x0004, 0x0004);  // ConfCtl0
   i2c1_uh2cd_write16(0x0002, 0x3F00);  // SysCtl
@@ -313,7 +338,8 @@ void RS1() {
   // Enter Sleep
   i2c1_uh2cd_write16(0x0002, 0x0001);  // SysCtl
 }
-void Panel_Init() {  // LCD Initialization LT070ME05000:
+void Panel_Init() {  
+  // LCD Initialization LT070ME05000:
   // Soft Reset
   i2c1_uh2cd_write16(0x0504, 0x0005);  // DCSCMD_Q
   i2c1_uh2cd_write16(0x0504, 0x0001);  // DCSCMD_Q
@@ -344,7 +370,7 @@ void Panel_Init() {  // LCD Initialization LT070ME05000:
 
   // Write Display brightness
   i2c1_uh2cd_write16(0x0504, 0x0015);  // DCSCMD_Q
-  i2c1_uh2cd_write16(0x0504, 0xE651);  // DCSCMD_Q
+  i2c1_uh2cd_write16(0x0504, 0x9951);  // DCSCMD_Q
 
   // Write control Display
   i2c1_uh2cd_write16(0x0504, 0x0015);  // DCSCMD_Q
