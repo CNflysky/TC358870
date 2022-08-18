@@ -8,9 +8,9 @@ I have a modified version of this board: Added I2C1 pull-up resistors, added an 
 You can find it at the `hardware` directory.  
 MCU: STM32F103C8T6  
 Board design used EasyEDA Pro.  
-![design](https://github.com/CNflysky/TC358870_Drivers/raw/main/images/board.png)
-![2d](https://github.com/CNflysky/TC358870_Drivers/raw/main/images/2d.png)
-![PCBA](https://github.com/CNflysky/TC358870_Drivers/raw/main/images/PCBA.jpg)
+![board](https://user-images.githubusercontent.com/48781081/185403061-dfd3fd86-fc98-4fd3-a1ca-e4b5496c8ae1.png)
+![2d](https://user-images.githubusercontent.com/48781081/185403119-4ca9f16e-12c6-49be-99d0-8bc7e5a23e32.png)
+![PCBA](https://user-images.githubusercontent.com/48781081/185403195-b15e27f5-cf48-46b7-87d2-ff140f1092de.jpg)
 
 # Software
 VSCode + PlatformIO as IDE, STM32CubeHAL library as SDK.  
