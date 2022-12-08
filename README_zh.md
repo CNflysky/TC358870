@@ -1,5 +1,5 @@
-# TC358870_Drivers
-一些TC358870XBG HDMI转MIPI桥接器的驱动程序。  
+# TC358870
+东芝TC358870XBG HDMI转MIPI-DSI芯片的软硬件设计。  
 
 # 硬件
 本项目硬件基于zengcym的硬件: [链接](https://github.com/zengcym/HDMI-To-MIPI)。  
@@ -36,4 +36,4 @@ Clone(或者下载)本仓库，先打开TC358870_USB_DFU_Bootloader,编译并上
 | ---- | ---- | --- | --- | --- | --- |
 | LT070ME05000 | 7' Inch| WUXGA(1920*1200)| MIPI 4 Lane | 31P 连接器 |
 |TPM0551002P | 5.5' Inch | FHD(1920*1080) | MIPI 4 Lane | 39P 连接器 | 触摸芯片:Synaptics S3351 |
-|VVX10F034N00 | 10.1' Inch | WUXGA(1920*1200) | MIPI 4 Lane | 51P 连接器 | 默认显示模式:横屏 |
+| ~VVX10F034N00~ | ~10.1' Inch~ | ~WUXGA(1920*1200)~ | ~MIPI 4 Lane~ | ~51P 连接器~ | ~默认显示模式:横屏~ |
