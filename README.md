@@ -1,5 +1,5 @@
 # TC358870_Drivers
-Various display drivers for the TC358870XBG HDMI to MIPI bridge.  
+Hardware & Software for the Toshiba TC358870XBG HDMI to MIPI-DSI bridge chip.  
 [Simplified Chinese](https://github.com/CNflysky/TC358870_Drivers/blob/main/README_zh.md)
 
 # Hardware
