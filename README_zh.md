@@ -3,7 +3,7 @@
 
 # 硬件
 本项目硬件基于zengcym的硬件: [链接](https://github.com/zengcym/HDMI-To-MIPI)。  
-我设计了一个改进版的硬件：在I2C1上加了上拉电阻，加了一个外接按键作为DFU下载使用，也引出了I2C2作为触摸驱动使用(触摸功能暂未实现)。  
+我设计了一个改进版的硬件：在I2C1上加了上拉电阻，加了一个外接按键作为DFU下载使用，也引出了I2C2，可作为触摸驱动。  
 板子放在`Hardware`文件夹里了。
 MCU使用STM32F103C8T6。  
 板子设计使用的是立创EDA专业版。
@@ -23,7 +23,7 @@ MCU使用STM32F103C8T6。
 # 编译并上传
 下载VSCode编辑器(百度一下)  
 打开VSCode,安装PlatformIO插件，然后等它装完（可能得一会）。  
-Clone(或者下载)本仓库，先打开TC358870_USB_DFU_Bootloader,编译并上传到板子上(可能您需要使用JLink或者是STLink来上传)。  
+Clone(或者下载)本仓库，先打开TC358870_USB_DFU_Bootloader,编译并上传到板子上(需要使用JLink或者是STLink来上传)。  
 然后使用一根Type-C线，把板子连上电脑，先按下用户按键(靠近HDMI端口那个按键)，再按下reset键，之后松开手。  
 然后USR_LED会开始闪烁，这就表示板子进入了DFU下载模式。  
 回到VSCode，打开TC358870，编译并下载。  
@@ -36,4 +36,3 @@ Clone(或者下载)本仓库，先打开TC358870_USB_DFU_Bootloader,编译并上
 | ---- | ---- | --- | --- | --- | --- |
 | LT070ME05000 | 7' Inch| WUXGA(1920*1200)| DSI 4 通道 | 31P 连接器 |
 | TPM0551002P | 5.5' Inch | FHD(1920*1080) | DSI 4 通道 | 39P 连接器 | 触摸芯片:Synaptics S3351 |
-| ~VVX10F034N00~ | ~10.1' Inch~ | ~WUXGA(1920*1200)~ | ~DSI 4 通道~ | ~51P 连接器~ | ~默认显示模式:横屏~ |
