@@ -70,6 +70,7 @@ void MX_USB_DEVICE_Init(void) {
   /* Init Device Library, add supported class and start the library. */
   if (USBD_Init(&hUsbDeviceFS, &FS_Desc, DEVICE_FS) != USBD_OK) {
     __disable_irq();
+    
     while (1) {
       HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_10);
       HAL_Delay(500);

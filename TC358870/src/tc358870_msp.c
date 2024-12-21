@@ -1,5 +1,7 @@
 #include "tc358870_msp.h"
 
+void SystemInit(void) { SCB->VTOR = VECT_TAB_BASE_ADDRESS | VECT_TAB_OFFSET; }
+
 uint32_t SystemCoreClock = 16000000;
 const uint8_t AHBPrescTable[16U] = {0, 0, 0, 0, 0, 0, 0, 0,
                                     1, 2, 3, 4, 6, 7, 8, 9};
@@ -14,33 +16,18 @@ void HAL_MspInit(void) {
 
 void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c) {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  if (hi2c->Instance == I2C1) {
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-    GPIO_InitStruct.Pin = GPIO_PIN_6 | GPIO_PIN_7;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-    __HAL_RCC_I2C1_CLK_ENABLE();
-  } else if (hi2c->Instance == I2C2) {
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-    GPIO_InitStruct.Pin = GPIO_PIN_10 | GPIO_PIN_11;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-    __HAL_RCC_I2C2_CLK_ENABLE();
-  }
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  GPIO_InitStruct.Pin = GPIO_PIN_6 | GPIO_PIN_7;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  __HAL_RCC_I2C1_CLK_ENABLE();
 }
 
 void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c) {
-  if (hi2c->Instance == I2C1) {
-    __HAL_RCC_I2C1_CLK_DISABLE();
-    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_6);
-    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_7);
-  } else if (hi2c->Instance == I2C2) {
-    __HAL_RCC_I2C2_CLK_DISABLE();
-    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_10);
-    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_11);
-  }
+  __HAL_RCC_I2C1_CLK_DISABLE();
+  HAL_GPIO_DeInit(GPIOB, GPIO_PIN_6);
+  HAL_GPIO_DeInit(GPIOB, GPIO_PIN_7);
 }
 
 void HAL_UART_MspInit(UART_HandleTypeDef* huart) {
@@ -164,3 +151,5 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim) {
 void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base) {
   if (htim_base->Instance == TIM2) __HAL_RCC_TIM2_CLK_DISABLE();
 }
+
+void EXTI15_10_IRQHandler(void) { HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_15); }

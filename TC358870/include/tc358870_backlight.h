@@ -3,14 +3,16 @@
 #include "tc358870_gpio.h"
 #include "tc358870_i2c.h"
 #include "tc358870_msp.h"
-TIM_HandleTypeDef htim2;
-void panel_cmd_backlight_setup();
-void panel_cmd_backlight_enable();
-void panel_cmd_backlight_disable();
-void panel_cmd_backlight_set_brightness(uint8_t br);
 
-void panel_pwm_backlight_setup();
-void panel_pwm_backlight_enable();
-void panel_pwm_backlight_disable();
-void panel_pwm_backlight_set_brightness(uint16_t br);
+#define CMD_BACKLIGHT
+// #define PWM_BACKLIGHT
+
+uint8_t br;
+
+TIM_HandleTypeDef htim2;
+void panel_backlight_setup();
+void panel_backlight_enable();
+void panel_backlight_disable();
+void panel_backlight_set_brightness_level(uint8_t br);
+void panel_backlight_set_brightness(uint16_t br);
 #endif

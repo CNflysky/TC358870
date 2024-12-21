@@ -4,6 +4,8 @@
 #include <system_stm32f1xx.h>
 
 #include "tc358870_gpio.h"
+#define VECT_TAB_BASE_ADDRESS FLASH_BASE
+#define VECT_TAB_OFFSET 0x5800U
 
 void HAL_MspInit(void);
 void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c);
