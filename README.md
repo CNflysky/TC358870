@@ -1,4 +1,5 @@
 # TC358870
+Deprecated: this project is no longer maintained.  
 Hardware & Software for the Toshiba TC358870XBG HDMI to MIPI-DSI bridge chip.  
 [Simplified Chinese](https://github.com/CNflysky/TC358870/blob/main/README_zh.md)
 
